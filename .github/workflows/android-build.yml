@@ -1,3 +1,4 @@
+
 name: AI Auto Trader APK
 
 on:
@@ -16,9 +17,9 @@ jobs:
 
       - name: Extract project
         run: |
+          rm -rf build-source
           mkdir -p build-source
-          unzip -q ai-auto-trader-source-fixed.zip -d build-source
-          echo "Extracted files:"
+          unzip -q ai-auto-trader-build-fixed.zip -d build-source
           find build-source -maxdepth 4 -type f | sort
 
       - name: Set up Java
@@ -29,6 +30,8 @@ jobs:
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v6
+        with:
+          gradle-version: '8.10.2'
 
       - name: Build Android APK
         working-directory: build-source/ai-auto-trader/android
